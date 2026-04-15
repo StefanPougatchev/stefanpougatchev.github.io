@@ -268,7 +268,10 @@ section { padding: 6rem 8vw; }
   outline: none; transition: border-color 0.2s; -webkit-appearance: none;
 }
 .fg input::placeholder, .fg textarea::placeholder { color: var(--faint); }
-.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--green); }
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(46, 93, 75, 0.2);
+}
 .fg textarea { resize: vertical; min-height: 110px; }
 .fsub {
   display: inline-flex; align-items: center; gap: 0.5rem;
