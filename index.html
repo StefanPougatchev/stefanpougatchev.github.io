@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefan · UGC Creator · Fitness & Lifestyle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #f8f6f2;
+  --surface:  #ede9e1;
+  --surface2: #e4dfd5;
+  --white:    #ffffff;
+  --ink:      #181815;
+  --ink-s:    #2c2c28;
+  --muted:    #545248;
+  --faint:    #8c8a82;
+  --border:   #d4d0c8;
+  --green:    #1f4d3a;
+  --green-lt: #2a6350;
+  --green-pale: #dce8e2;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif; background: var(--bg); color: var(--ink);
+  font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem; height: 60px;
+  background: rgba(248,246,242,0.97); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif; font-weight: 400;
+  font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: 0.02em;
+}
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.75rem; font-weight: 400; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  font-size: 0.72rem !important; font-weight: 500 !important;
+  text-transform: none !important; letter-spacing: 0.03em !important;
+  color: var(--white) !important; background: var(--ink) !important;
+  padding: 0.48rem 1.2rem !important; border-radius: 3px !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--green) !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; padding-top: 60px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-left: 8vw; padding-right: 8vw; max-width: 860px;
+}
+.hero-label {
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--faint); margin-bottom: 2rem;
+}
+.hero-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--faint); }
+.avail { color: var(--green); }
+
+.hero-headline {
+  font-family: 'Playfair Display', serif; font-weight: 400;
+  font-size: clamp(2.8rem, 5vw, 5.5rem);
+  line-height: 1.1; color: var(--ink); margin-bottom: 1.75rem; letter-spacing: -0.01em;
+}
+.hero-headline em { font-style: italic; color: var(--green); }
+.hero-headline .grn { font-style: italic; color: var(--green); }
+
+.hero-sub {
+  font-size: 1rem; font-weight: 300; color: var(--muted);
+  max-width: 500px; line-height: 1.85; margin-bottom: 2.5rem;
+}
+.hero-btns { display: flex; align-items: center; gap: 1rem; }
+.btn-dark {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.75rem; background: var(--ink); color: var(--white);
+  font-size: 0.82rem; font-weight: 500; letter-spacing: 0.03em;
+  text-decoration: none; border-radius: 3px; transition: background 0.2s;
+}
+.btn-dark:hover { background: var(--green); }
+.btn-text {
+  font-size: 0.82rem; font-weight: 400; color: var(--muted);
+  text-decoration: none; display: inline-flex; align-items: center;
+  gap: 0.35rem; transition: color 0.2s;
+}
+.btn-text:hover { color: var(--green); }
+
+.hero-stats {
+  display: flex; gap: 3rem; margin-top: 4rem;
+  padding-top: 2.5rem; border-top: 1px solid var(--border);
+}
+.stat-num {
+  font-family: 'Playfair Display', serif; font-size: 2.2rem;
+  font-weight: 400; color: var(--ink); line-height: 1;
+}
+.stat-lbl {
+  font-size: 0.65rem; font-weight: 400; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--faint); margin-top: 0.35rem;
+}
+
+/* ── DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 0 8vw; }
+
+/* ── SECTIONS ── */
+section { padding: 6rem 8vw; }
+.sec-label {
+  font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--faint); margin-bottom: 0.75rem; display: block;
+}
+.sec-title {
+  font-family: 'Playfair Display', serif; font-weight: 400;
+  font-size: clamp(2rem, 3vw, 2.8rem); color: var(--ink);
+  line-height: 1.15; margin-bottom: 0.75rem;
+}
+.sec-title em { font-style: italic; color: var(--green); }
+.sec-title .t { font-style: italic; color: var(--green); }
+.sec-sub { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.85; max-width: 480px; }
+
+/* ── PORTFOLIO ── */
+#portfolio { background: var(--bg); }
+.port-hdr { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+.work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.work-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden; cursor: pointer;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(30,30,27,0.07); }
+.wc-media {
+  aspect-ratio: 9/16; background: var(--surface);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+  transition: background 0.2s;
+}
+.work-card:hover .wc-media { background: var(--surface2); }
+.play-ring {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--white);
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.work-card:hover .play-ring { background: var(--ink); border-color: var(--ink); }
+.play-ring svg { width: 16px; height: 16px; fill: var(--muted); margin-left: 2px; transition: fill 0.2s; }
+.work-card:hover .play-ring svg { fill: var(--white); }
+.ph-lbl { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.wc-info { padding: 1.25rem 1.35rem; border-top: 1px solid var(--border); }
+.wc-cat { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); margin-bottom: 0.35rem; }
+.wc-name { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.3rem; }
+.wc-hook { font-size: 0.78rem; font-weight: 300; color: var(--muted); font-style: italic; line-height: 1.55; }
+
+.note {
+  margin-top: 1.75rem; padding: 1.35rem 1.75rem;
+  background: var(--green-pale); border-left: 2px solid var(--green);
+  font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.75;
+  border-radius: 0 3px 3px 0;
+}
+.note strong { color: var(--ink-s); font-weight: 500; }
+
+/* ── RATES ── */
+#rates { background: var(--surface); }
+.rates-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 2.75rem;
+}
+.rc { background: var(--white); padding: 2.25rem 2rem; transition: background 0.2s; position: relative; }
+.rc:hover { background: var(--bg); }
+.rc.feat { background: var(--green); }
+.rc.feat:hover { background: var(--green-lt); }
+
+/* accent top bar on hover for non-featured */
+.rc::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: var(--green);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.rc:not(.feat):hover::before { transform: scaleX(1); }
+.rc.feat::before { display: none; }
+
+.feat-tag {
+  font-size: 0.58rem; font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--green); display: block; margin-bottom: 1rem;
+}
+.rc.feat .feat-tag { color: rgba(255,255,255,0.55); }
+.rc-name {
+  font-family: 'Playfair Display', serif; font-weight: 400;
+  font-size: 1.25rem; color: var(--ink); margin-bottom: 1.25rem;
+}
+.rc.feat .rc-name { color: var(--white); }
+.rc-price {
+  font-family: 'Playfair Display', serif; font-weight: 400;
+  font-size: 3.5rem; line-height: 1; color: var(--ink); letter-spacing: -0.02em;
+}
+.rc.feat .rc-price { color: var(--white); }
+.rc-mo { font-size: 0.88rem; font-weight: 300; color: var(--faint); }
+.rc.feat .rc-mo { color: rgba(255,255,255,0.5); }
+.rc-desc { font-size: 0.75rem; font-weight: 300; color: var(--muted); margin: 0.3rem 0 1.5rem; }
+.rc.feat .rc-desc { color: rgba(255,255,255,0.5); }
+.rc-div { height: 1px; background: var(--border); margin-bottom: 1.5rem; }
+.rc.feat .rc-div { background: rgba(255,255,255,0.15); }
+.rc-feats { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+.rc-feats li {
+  display: flex; align-items: flex-start; gap: 0.6rem;
+  font-size: 0.8rem; font-weight: 300; color: var(--ink); line-height: 1.5;
+}
+.rc.feat .rc-feats li { color: rgba(255,255,255,0.8); }
+.chk {
+  width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 50%;
+}
+.rc.feat .chk { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+.chk svg { width: 8px; height: 8px; stroke: var(--green); fill: none; stroke-width: 2.5; }
+.rc.feat .chk svg { stroke: rgba(255,255,255,0.9); }
+.rc-btn {
+  display: block; text-align: center; padding: 0.78rem;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+  text-decoration: none; border-radius: 3px; transition: all 0.2s;
+  border: 1px solid var(--border); color: var(--ink);
+}
+.rc-btn:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.rc.feat .rc-btn { border-color: rgba(255,255,255,0.4); color: var(--white); }
+.rc.feat .rc-btn:hover { background: var(--white); color: var(--green); border-color: var(--white); }
+.rates-note {
+  margin-top: 1.5rem; font-size: 0.76rem; font-weight: 300;
+  color: var(--faint); line-height: 1.75;
+}
+.rates-note a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── CONTACT ── */
+#contact { background: var(--bg); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 2.75rem; align-items: start; }
+.c-deets { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.4rem; }
+.c-lbl {
+  font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--faint); margin-bottom: 0.3rem;
+}
+.c-val { font-size: 0.88rem; font-weight: 300; color: var(--ink); }
+.c-val a { color: var(--green); text-decoration: none; }
+.c-val a:hover { text-decoration: underline; }
+.c-promise {
+  margin-top: 2rem; padding: 1.25rem 1.5rem;
+  background: var(--green-pale); border: 1px solid rgba(46,93,75,0.12);
+  border-radius: 3px; font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.75;
+}
+.c-promise strong { color: var(--green); font-weight: 500; }
+
+.cform { display: flex; flex-direction: column; gap: 1rem; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.fg { display: flex; flex-direction: column; gap: 0.4rem; }
+.fg label {
+  font-size: 0.6rem; font-weight: 500; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--faint);
+}
+.fg input, .fg select, .fg textarea {
+  background: var(--white); border: 1px solid var(--border); color: var(--ink);
+  padding: 0.8rem 1rem; font-family: 'Inter', sans-serif;
+  font-size: 0.85rem; font-weight: 300; border-radius: 3px;
+  outline: none; transition: border-color 0.2s; -webkit-appearance: none;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: var(--faint); }
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: var(--green); }
+.fg textarea { resize: vertical; min-height: 110px; }
+.fsub {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.8rem 1.75rem; background: var(--ink); color: var(--white);
+  font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500;
+  border: none; border-radius: 3px; cursor: pointer;
+  transition: background 0.2s; align-self: flex-start; margin-top: 0.5rem;
+}
+.fsub:hover { background: var(--green); }
+
+/* ── ABOUT ── */
+#about {
+  background: var(--surface);
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: 5rem; align-items: center; border-top: 1px solid var(--border);
+}
+.about-img {
+  aspect-ratio: 4/5; background: var(--surface2);
+  border-radius: 4px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+}
+.ph-photo { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+.ph-photo svg { width: 36px; height: 36px; stroke: var(--faint); fill: none; }
+.ph-photo p { font-size: 0.65rem; letter-spacing: 0.08em; color: var(--faint); }
+.badge-row { display: flex; gap: 0.5rem; margin-top: 1.25rem; flex-wrap: wrap; }
+.nbadge {
+  font-size: 0.62rem; font-weight: 400; letter-spacing: 0.08em;
+  color: var(--muted); padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border); border-radius: 2px;
+  transition: all 0.2s; cursor: default;
+}
+.nbadge:hover { border-color: var(--green); color: var(--green); }
+
+.about-body { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.9; margin-top: 1rem; }
+.values { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0; }
+.val {
+  display: flex; gap: 1.25rem; align-items: flex-start;
+  padding: 1.35rem 0; border-bottom: 1px solid var(--border);
+  transition: padding-left 0.2s;
+}
+.val:first-child { border-top: 1px solid var(--border); }
+.val:hover { padding-left: 0.35rem; }
+.val-n {
+  font-family: 'Playfair Display', serif; font-weight: 400; font-style: italic;
+  font-size: 1rem; color: var(--green); min-width: 1.75rem; margin-top: 0.1rem; opacity: 0.75;
+}
+.val strong { font-size: 0.83rem; font-weight: 500; color: var(--ink-s); display: block; margin-bottom: 0.25rem; }
+.val p { font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 2rem 8vw; background: var(--surface);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; border-top: 1px solid var(--border);
+}
+.f-logo { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1rem; color: var(--faint); text-decoration: none; }
+.f-niche { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.f-copy { font-size: 0.65rem; font-weight: 300; color: var(--faint); }
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
+  .hero { padding: 5.5rem 6vw 3rem; min-height: auto; }
+  section { padding: 5rem 6vw; }
+  .work-grid { grid-template-columns: 1fr 1fr; }
+  .rates-grid { grid-template-columns: 1fr; }
+  .rc.feat { order: -1; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  #about { grid-template-columns: 1fr; gap: 2.5rem; }
+  .divider { margin: 0 6vw; }
+}
+@media (max-width: 560px) {
+  .nav-links { display: none; }
+  .work-grid { grid-template-columns: 1fr; }
+  .frow { grid-template-columns: 1fr; }
+  .hero-stats { gap: 2rem; }
+  .hero-headline { font-size: 2.6rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Stefan</a>
+  <ul class="nav-links">
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#rates">Rates</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">
+    <span class="avail">●</span> Available · Fitness &amp; Lifestyle · San Francisco
+  </div>
+  <h1 class="hero-headline">
+    Short-form content<br>that <em>actually</em> <span class="grn">converts.</span>
+  </h1>
+  <p class="hero-sub">I create UGC videos for fitness and wellness brands — hook-first, built for paid social, delivered on time. No fluff, no chasing me down.</p>
+  <div class="hero-btns">
+    <a href="#portfolio" class="btn-dark">
+      View my work
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="#rates" class="btn-text">See pricing →</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">3</div><div class="stat-lbl">Spec Videos</div></div>
+    <div><div class="stat-num">&lt;24h</div><div class="stat-lbl">Response Time</div></div>
+    <div><div class="stat-num">7 days</div><div class="stat-lbl">Turnaround</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="portfolio">
+  <div class="port-hdr">
+    <div>
+      <span class="sec-label">Portfolio</span>
+      <h2 class="sec-title">Examples that <em>convert.</em></h2>
+    </div>
+    <p class="sec-sub">Every video opens with a 2-second hook, clean audio, and a clear CTA — ready to run as a paid social ad.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-card reveal">
+      <div class="wc-media">
+        <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <span class="ph-lbl">Add your video</span>
+      </div>
+      <div class="wc-info">
+        <div class="wc-cat">Fitness Equipment</div>
+        <div class="wc-name">Slant Board</div>
+        <div class="wc-hook">"My knees used to ache every squat session…"</div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="wc-media">
+        <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <span class="ph-lbl">Add your video</span>
+      </div>
+      <div class="wc-info">
+        <div class="wc-cat">Gym Accessories</div>
+        <div class="wc-name">Chalkless Grip</div>
+        <div class="wc-hook">"The one thing keeping me from my PR…"</div>
+      </div>
+    </div>
+    <div class="work-card reveal">
+      <div class="wc-media">
+        <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <span class="ph-lbl">Add your video</span>
+      </div>
+      <div class="wc-info">
+        <div class="wc-cat">Supplements</div>
+        <div class="wc-name">Momentous Protein</div>
+        <div class="wc-hook">"I've tried 12 proteins. This one actually stuck."</div>
+      </div>
+    </div>
+  </div>
+  <div class="note reveal">
+    <strong>Spec content.</strong> These videos were produced for products I personally use. All filmed and edited by me — no templates, no stock footage. Hook, product, payoff.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="rates">
+  <span class="sec-label">Pricing</span>
+  <h2 class="sec-title">Clear rates. <span class="t">No surprises.</span></h2>
+  <p class="sec-sub">Everything listed upfront — deliverables, revisions, turnaround. No DMs required to get a number.</p>
+  <div class="rates-grid">
+    <div class="rc reveal">
+      <div class="rc-name">Solo</div>
+      <div><span class="rc-price">$150</span></div>
+      <div class="rc-desc">1 video · 1 concept</div>
+      <div class="rc-div"></div>
+      <ul class="rc-feats">
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>1 × 15–30s UGC video</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>1 hook variation</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>2 revision rounds</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>5–7 business day delivery</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Full paid social usage rights</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Raw + edited file</li>
+      </ul>
+      <a href="#contact" class="rc-btn">Get started</a>
+    </div>
+    <div class="rc feat reveal">
+      <span class="feat-tag">Best value</span>
+      <div class="rc-name">Bundle</div>
+      <div><span class="rc-price">$375</span></div>
+      <div class="rc-desc">3 videos · save ~$75</div>
+      <div class="rc-div"></div>
+      <ul class="rc-feats">
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>3 × 15–30s UGC videos</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Up to 3 hook variations</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>2 revision rounds per video</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Delivered within 10 business days</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Full paid social usage rights</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Raw + edited files</li>
+      </ul>
+      <a href="#contact" class="rc-btn">Get started</a>
+    </div>
+    <div class="rc reveal">
+      <div class="rc-name">Retainer</div>
+      <div><span class="rc-price">$500</span><span class="rc-mo"> /mo</span></div>
+      <div class="rc-desc">4 videos · priority turnaround</div>
+      <div class="rc-div"></div>
+      <ul class="rc-feats">
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>4 × 15–30s UGC videos / month</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Multiple hook + angle options</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>2 revision rounds per video</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>7-day turnaround per video</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Full paid social usage rights</li>
+        <li><span class="chk"><svg viewBox="0 0 12 12" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg></span>Priority scheduling + comms</li>
+      </ul>
+      <a href="#contact" class="rc-btn">Get started</a>
+    </div>
+  </div>
+  <p class="rates-note">UGC only — no posting to my channels. Extended licensing available. Custom scope? <a href="#contact">Let's talk.</a></p>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <span class="sec-label">Contact</span>
+  <h2 class="sec-title">Let's work together.</h2>
+  <div class="contact-grid">
+    <div>
+      <p class="sec-sub">Send me a brief and I'll reply within 24 hours with a clear scope and timeline. If I'm not the right fit, I'll tell you.</p>
+      <div class="c-deets">
+        <div><div class="c-lbl">Email</div><div class="c-val"><a href="mailto:ugcstefan@gmail.com">ugcstefan@gmail.com</a></div></div>
+        <div><div class="c-lbl">Based in</div><div class="c-val">San Francisco, CA</div></div>
+        <div><div class="c-lbl">Niche</div><div class="c-val">Fitness · Performance · Wellness</div></div>
+      </div>
+      <div class="c-promise">
+        <strong>What to expect:</strong> I review your brief, check product fit, and reply with scope + timeline. No ghost-quoting.
+      </div>
+    </div>
+    <form class="cform" onsubmit="handleSubmit(event)">
+      <div class="frow">
+        <div class="fg"><label for="nm">Name</label><input type="text" id="nm" placeholder="Jane Smith" required></div>
+        <div class="fg"><label for="br">Brand</label><input type="text" id="br" placeholder="Acme Fitness" required></div>
+      </div>
+      <div class="fg"><label for="em">Email</label><input type="email" id="em" placeholder="jane@brand.com" required></div>
+      <div class="fg">
+        <label for="pk">Package</label>
+        <select id="pk">
+          <option value="">Select…</option>
+          <option>Solo — $150</option>
+          <option>Bundle — $375</option>
+          <option>Retainer — $500/mo</option>
+          <option>Custom</option>
+        </select>
+      </div>
+      <div class="fg"><label for="ms">Brief</label><textarea id="ms" placeholder="What product, what goal, any references?" required></textarea></div>
+      <button type="submit" class="fsub">
+        Send
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<section id="about">
+  <div>
+    <div class="about-img">
+      <div class="ph-photo">
+        <svg viewBox="0 0 24 24" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+        <p>Your photo</p>
+      </div>
+    </div>
+    <div class="badge-row">
+      <span class="nbadge">Fitness</span>
+      <span class="nbadge">Supplements</span>
+      <span class="nbadge">Recovery</span>
+    </div>
+  </div>
+  <div>
+    <span class="sec-label">About</span>
+    <h2 class="sec-title">Stefan.</h2>
+    <p class="about-body">I'm a San Francisco-based creator documenting my fitness journey. I make UGC for brands whose products I actually use — gym equipment, supplements, recovery gear. That authenticity shows up on screen in a way a hired actor can't replicate.</p>
+    <p class="about-body" style="margin-top:0.85rem">I'm not chasing follower counts. I'm building a track record of content that performs in paid media — clean audio, strong hooks, delivered on time.</p>
+    <div class="values">
+      <div class="val reveal">
+        <span class="val-n">i.</span>
+        <div>
+          <strong>Hook in 2 seconds or it doesn't exist</strong>
+          <p>Every video opens with a pattern interrupt that stops the scroll before the skip.</p>
+        </div>
+      </div>
+      <div class="val reveal">
+        <span class="val-n">ii.</span>
+        <div>
+          <strong>Built for paid media, not your story feed</strong>
+          <p>Native feel, clean audio, no watermarks, platform-spec delivery. Ready to run.</p>
+        </div>
+      </div>
+      <div class="val reveal">
+        <span class="val-n">iii.</span>
+        <div>
+          <strong>Easy to work with</strong>
+          <p>I hit deadlines, communicate proactively, and make the brand manager's job easier. That's how repeat work happens.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="f-logo">Stefan</a>
+  <span class="f-niche">Fitness · Lifestyle · UGC</span>
+  <span class="f-copy">© 2026 · San Francisco, CA</span>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.fsub');
+  btn.innerHTML = 'Sent ✓';
+  btn.style.background = '#2e5d4b';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.innerHTML = 'Send <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+    btn.style.background = ''; btn.disabled = false; e.target.reset();
+  }, 3500);
+}
+const io = new IntersectionObserver(entries => {
+  entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('in'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
