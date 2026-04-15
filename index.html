@@ -514,13 +514,13 @@ footer {
     </div>
     <form class="cform" onsubmit="handleSubmit(event)">
       <div class="frow">
-        <div class="fg"><label for="nm">Name</label><input type="text" id="nm" placeholder="Jane Smith" required></div>
-        <div class="fg"><label for="br">Brand</label><input type="text" id="br" placeholder="Acme Fitness" required></div>
+        <div class="fg"><label for="nm">Name</label><input type="text" id="nm" name="name" placeholder="Jane Smith" required></div>
+        <div class="fg"><label for="br">Brand</label><input type="text" id="br" name="brand" placeholder="Acme Fitness" required></div>
       </div>
-      <div class="fg"><label for="em">Email</label><input type="email" id="em" placeholder="jane@brand.com" required></div>
+      <div class="fg"><label for="em">Email</label><input type="email" id="em" name="email" placeholder="jane@brand.com" required></div>
       <div class="fg">
         <label for="pk">Package</label>
-        <select id="pk">
+        <select id="pk" name="package">
           <option value="">Select…</option>
           <option>Solo — $150</option>
           <option>Bundle — $375</option>
@@ -528,7 +528,7 @@ footer {
           <option>Custom</option>
         </select>
       </div>
-      <div class="fg"><label for="ms">Brief</label><textarea id="ms" placeholder="What product, what goal, any references?" required></textarea></div>
+      <div class="fg"><label for="ms">Brief</label><textarea id="ms" name="brief" placeholder="What product, what goal, any references?" required></textarea></div>
       <button type="submit" class="fsub">
         Send
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -589,16 +589,37 @@ footer {
 </footer>
 
 <script>
-function handleSubmit(e) {
+async function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.fsub');
-  btn.innerHTML = 'Sent ✓';
-  btn.style.background = '#2e5d4b';
+  const form = e.target;
+  const btn = form.querySelector('.fsub');
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = 'Sending…';
   btn.disabled = true;
-  setTimeout(() => {
-    btn.innerHTML = 'Send <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
-    btn.style.background = ''; btn.disabled = false; e.target.reset();
-  }, 3500);
+  const data = Object.fromEntries(new FormData(form).entries());
+  data._subject = `New UGC inquiry from ${data.name || 'someone'} (${data.brand || 'brand?'})`;
+  data._template = 'table';
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/ugcstefan@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!res.ok) throw new Error('Network response was not ok');
+    btn.innerHTML = 'Sent ✓';
+    btn.style.background = '#2e5d4b';
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.style.background = ''; btn.disabled = false; form.reset();
+    }, 3500);
+  } catch (err) {
+    btn.innerHTML = 'Error — try again';
+    btn.style.background = '#8b2e2e';
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.style.background = ''; btn.disabled = false;
+    }, 3500);
+  }
 }
 const io = new IntersectionObserver(entries => {
   entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('in'); });
