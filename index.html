@@ -513,6 +513,7 @@ footer {
       </div>
     </div>
     <form class="cform" onsubmit="handleSubmit(event)">
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">
       <div class="frow">
         <div class="fg"><label for="nm">Name</label><input type="text" id="nm" name="name" placeholder="Jane Smith" required></div>
         <div class="fg"><label for="br">Brand</label><input type="text" id="br" name="brand" placeholder="Acme Fitness" required></div>
@@ -589,18 +590,33 @@ footer {
 </footer>
 
 <script>
+const pageLoadedAt = Date.now();
 async function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector('.fsub');
   const originalHTML = btn.innerHTML;
+
+  // Time-trap: reject submissions faster than a human could plausibly fill the form.
+  // Fail silently (pretend success) so bots don't learn what triggered the block.
+  if (Date.now() - pageLoadedAt < 2000) {
+    btn.innerHTML = 'Sent ✓';
+    btn.style.background = '#2e5d4b';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.style.background = ''; btn.disabled = false; form.reset();
+    }, 3500);
+    return;
+  }
+
   btn.innerHTML = 'Sending…';
   btn.disabled = true;
   const data = Object.fromEntries(new FormData(form).entries());
   data._subject = `New UGC inquiry from ${data.name || 'someone'} (${data.brand || 'brand?'})`;
   data._template = 'table';
   try {
-    const res = await fetch('https://formsubmit.co/ajax/ugcstefan@gmail.com', {
+    const res = await fetch('https://formsubmit.co/ajax/bf29f5294ab235c75c13e603d3129291', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(data)
