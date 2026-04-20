@@ -162,8 +162,11 @@ section { padding: 6rem 8vw; }
 .wc-cat { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); margin-bottom: 0.35rem; }
 .wc-name { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.3rem; }
 .wc-hook { font-size: 0.78rem; font-weight: 300; color: var(--muted); font-style: italic; line-height: 1.55; }
-.wc-nav { display: flex; align-items: center; justify-content: flex-end; gap: 0.6rem; padding: 0.6rem 0.1rem 0 0; }
-.wc-counter { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+.wc-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid var(--border);
+}
+.wc-counter { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.05em; color: var(--muted); }
 .wc-btn {
   width: 36px; height: 36px; border-radius: 50%;
   border: 1px solid var(--border); background: var(--white);
@@ -173,6 +176,10 @@ section { padding: 6rem 8vw; }
 .wc-btn:hover { background: var(--ink); border-color: var(--ink); }
 .wc-btn svg { width: 15px; height: 15px; stroke: var(--muted); transition: stroke 0.2s; }
 .wc-btn:hover svg { stroke: var(--white); }
+.wc-back::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(245,244,241,0.55); pointer-events: none; z-index: 3;
+}
 
 .note {
   margin-top: 1.75rem; padding: 1.35rem 1.75rem;
@@ -413,7 +420,7 @@ footer {
   <div class="port-hdr">
     <div>
       <span class="sec-label">Portfolio</span>
-      <h2 class="sec-title">Examples that <em>convert.</em></h2>
+      <h2 class="sec-title">Past <em>work.</em></h2>
     </div>
     <p class="sec-sub">Every video opens with a 2-second hook, clean audio, and a clear CTA — ready to run as a paid social ad.</p>
   </div>
@@ -422,7 +429,6 @@ footer {
     <!-- ── Slant Board ── -->
     <div class="work-carousel reveal">
       <div class="wc-stack">
-        <!-- back card (placeholder) -->
         <div class="work-card wc-back">
           <div class="wc-media">
             <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
@@ -432,9 +438,12 @@ footer {
             <div class="wc-cat">Fitness Equipment</div>
             <div class="wc-name">Slant Board</div>
             <div class="wc-hook">"I always had issues doing full range of motion with squats..."</div>
+            <div class="wc-nav">
+              <span class="wc-counter">2 / 2</span>
+              <button class="wc-btn" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
         </div>
-        <!-- front card -->
         <div class="work-card wc-front">
           <div class="wc-media">
             <iframe src="https://www.youtube.com/embed/LF_bIa82ins" title="Slant Board UGC" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -443,14 +452,12 @@ footer {
             <div class="wc-cat">Fitness Equipment</div>
             <div class="wc-name">Slant Board</div>
             <div class="wc-hook">"Does your knee hurt, like right here?"</div>
+            <div class="wc-nav">
+              <span class="wc-counter">1 / 2</span>
+              <button class="wc-btn" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="wc-nav">
-        <span class="wc-counter">1 / 2</span>
-        <button class="wc-btn" aria-label="Next example">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
       </div>
     </div>
 
@@ -466,6 +473,10 @@ footer {
             <div class="wc-cat">Gym Accessories</div>
             <div class="wc-name">Chalkless Grip</div>
             <div class="wc-hook">"Hook #2 coming soon…"</div>
+            <div class="wc-nav">
+              <span class="wc-counter">2 / 2</span>
+              <button class="wc-btn" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
         </div>
         <div class="work-card wc-front">
@@ -477,14 +488,12 @@ footer {
             <div class="wc-cat">Gym Accessories</div>
             <div class="wc-name">Chalkless Grip</div>
             <div class="wc-hook">"The one thing keeping me from my PR…"</div>
+            <div class="wc-nav">
+              <span class="wc-counter">1 / 2</span>
+              <button class="wc-btn" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="wc-nav">
-        <span class="wc-counter">1 / 2</span>
-        <button class="wc-btn" aria-label="Next example">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
       </div>
     </div>
 
@@ -500,6 +509,10 @@ footer {
             <div class="wc-cat">Supplements</div>
             <div class="wc-name">Momentous Protein</div>
             <div class="wc-hook">"Hook #2 coming soon…"</div>
+            <div class="wc-nav">
+              <span class="wc-counter">2 / 2</span>
+              <button class="wc-btn" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
         </div>
         <div class="work-card wc-front">
@@ -511,14 +524,12 @@ footer {
             <div class="wc-cat">Supplements</div>
             <div class="wc-name">Momentous Protein</div>
             <div class="wc-hook">"I've tried 12 proteins. This one actually stuck."</div>
+            <div class="wc-nav">
+              <span class="wc-counter">1 / 2</span>
+              <button class="wc-btn" aria-label="Next example"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="wc-nav">
-        <span class="wc-counter">1 / 2</span>
-        <button class="wc-btn" aria-label="Next example">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
       </div>
     </div>
 
@@ -730,24 +741,14 @@ async function handleSubmit(e) {
 // ── Carousel ──
 document.querySelectorAll('.work-carousel').forEach(carousel => {
   const stack = carousel.querySelector('.wc-stack');
-  const counter = carousel.querySelector('.wc-counter');
-  const btn = carousel.querySelector('.wc-btn');
-  const cards = () => stack.querySelectorAll('.work-card');
-  let current = 1;
-  const total = cards().length;
-
-  btn.addEventListener('click', () => {
+  stack.addEventListener('click', e => {
+    if (!e.target.closest('.wc-btn')) return;
     const front = stack.querySelector('.wc-front');
     const back  = stack.querySelector('.wc-back');
-
-    // Swap classes — CSS transitions handle the animation
     front.classList.replace('wc-front', 'wc-back');
     back.classList.replace('wc-back', 'wc-front');
     back.style.pointerEvents  = '';
     front.style.pointerEvents = 'none';
-
-    current = current === total ? 1 : current + 1;
-    counter.textContent = `${current} / ${total}`;
   });
 });
 
