@@ -67,24 +67,59 @@ nav {
 .hero-video { flex-shrink: 0; }
 .hero-stack {
   position: relative;
-  /* wide + tall enough to show all 3 cards in the fan */
-  width: clamp(300px, 32vw, 460px);
-  height: clamp(280px, 30vw, 430px);
+  width: clamp(380px, 38vw, 540px);
+  height: clamp(420px, 42vw, 560px);
 }
 .hero-video-card {
   position: absolute;
-  width: clamp(130px, 13vw, 185px);
+  width: clamp(200px, 20vw, 280px);
   aspect-ratio: 9/16;
-  border-radius: 10px; overflow: hidden;
+  top: 50%;
+  border-radius: 12px; overflow: hidden;
   border: 1px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1),
+              opacity 0.6s, filter 0.6s, box-shadow 0.6s;
 }
-/* left card — front, no offset */
-.hv-front { left: 0; top: 20px; z-index: 3; box-shadow: 0 24px 64px rgba(30,30,27,0.16); }
-/* centre card — slightly lower */
-.hv-mid   { left: 34%; top: 40px; z-index: 2; box-shadow: 0 16px 44px rgba(30,30,27,0.10); background: var(--surface); }
-/* right card — slightly higher than mid */
-.hv-back  { left: 68%; top: 10px; z-index: 1; box-shadow: 0 8px 28px rgba(30,30,27,0.07); background: var(--surface2); }
 .hero-video-card iframe { width: 100%; height: 100%; border: 0; display: block; }
+.card-ph {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface);
+}
+.card-ph svg { width: 36px; height: 36px; stroke: var(--faint); fill: none; stroke-width: 1.5; }
+
+/* centered & featured */
+.pos-center {
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 3;
+  opacity: 1;
+  box-shadow: 0 28px 72px rgba(30,30,27,0.20);
+}
+/* peeking left */
+.pos-left {
+  left: 0;
+  transform: translateY(-50%) scale(0.74);
+  transform-origin: left center;
+  z-index: 2;
+  opacity: 0.78;
+  filter: brightness(0.92);
+  box-shadow: 0 16px 44px rgba(30,30,27,0.10);
+}
+/* peeking right */
+.pos-right {
+  right: 0;
+  transform: translateY(-50%) scale(0.74);
+  transform-origin: right center;
+  z-index: 2;
+  opacity: 0.78;
+  filter: brightness(0.92);
+  box-shadow: 0 16px 44px rgba(30,30,27,0.10);
+}
+/* disable iframe clicks on non-center cards so parent can catch click */
+.pos-left iframe, .pos-right iframe { pointer-events: none; }
 .hero-label {
   display: flex; align-items: center; gap: 0.75rem;
   font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
@@ -439,22 +474,18 @@ footer {
     </div>
   </div>
   <div class="hero-video">
-    <div class="hero-stack">
-      <!-- back: Momentous placeholder -->
-      <div class="hero-video-card hv-back">
-        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c8c4bb" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
+    <div class="hero-stack" id="heroStack">
+      <!-- Chalkless placeholder — starts at left -->
+      <div class="hero-video-card pos-left">
+        <div class="card-ph"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
       </div>
-      <!-- mid: Chalkless placeholder -->
-      <div class="hero-video-card hv-mid">
-        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c8c4bb" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-      </div>
-      <!-- front: Slant Board video -->
-      <div class="hero-video-card hv-front">
+      <!-- Slant Board video — starts at center -->
+      <div class="hero-video-card pos-center">
         <iframe src="https://www.youtube.com/embed/LF_bIa82ins" title="Slant Board UGC" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <!-- Momentous placeholder — starts at right -->
+      <div class="hero-video-card pos-right">
+        <div class="card-ph"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
       </div>
     </div>
   </div>
@@ -784,7 +815,43 @@ async function handleSubmit(e) {
     }, 3500);
   }
 }
-// ── Carousel ──
+// ── Hero fan rotator ──
+(function () {
+  const stack = document.getElementById('heroStack');
+  if (!stack) return;
+  const cards = Array.from(stack.querySelectorAll('.hero-video-card'));
+  const POSITIONS = ['pos-left', 'pos-center', 'pos-right'];
+  const INTERVAL = 5000;
+  let order = [0, 1, 2]; // order[i] = index of card at POSITIONS[i]
+  let timer = null;
+  let stopped = false;
+
+  const render = () => {
+    cards.forEach(c => c.classList.remove(...POSITIONS));
+    order.forEach((cardIdx, posIdx) => cards[cardIdx].classList.add(POSITIONS[posIdx]));
+  };
+  const tick = () => { order = [order[2], order[0], order[1]]; render(); };
+  const start = () => { if (!stopped && !timer) timer = setInterval(tick, INTERVAL); };
+  const pause = () => { if (timer) { clearInterval(timer); timer = null; } };
+  const stop  = () => { stopped = true; pause(); };
+
+  // hover = pause; leave = resume (unless clicked)
+  stack.addEventListener('mouseenter', pause);
+  stack.addEventListener('mouseleave', start);
+
+  // click any card = stop rotation permanently; if side card, bring to center
+  cards.forEach((card, i) => {
+    card.addEventListener('click', () => {
+      stop();
+      while (order[1] !== i) order = [order[2], order[0], order[1]];
+      render();
+    });
+  });
+
+  start();
+})();
+
+// ── Portfolio carousels ──
 document.querySelectorAll('.work-carousel').forEach(carousel => {
   const stack = carousel.querySelector('.wc-stack');
   stack.addEventListener('click', e => {
