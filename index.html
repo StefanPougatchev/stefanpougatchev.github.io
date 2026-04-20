@@ -132,32 +132,47 @@ section { padding: 6rem 8vw; }
 #portfolio { background: var(--bg); }
 .port-hdr { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
 .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.work-carousel { display: flex; flex-direction: column; }
+.wc-stack { position: relative; padding-right: 12px; padding-bottom: 12px; }
 .work-card {
   background: var(--white); border: 1px solid var(--border);
   border-radius: 4px; overflow: hidden; cursor: pointer;
-  transition: box-shadow 0.25s, transform 0.25s;
+  transition: box-shadow 0.35s, transform 0.4s cubic-bezier(.22,.68,0,1.2);
 }
-.work-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(30,30,27,0.07); }
+.work-card.wc-front { position: relative; z-index: 2; transform: translate(0,0); }
+.work-card.wc-back  { position: absolute; top: 0; left: 0; right: 0; bottom: 0; transform: translate(12px,12px); z-index: 1; pointer-events: none; overflow: hidden; }
+.work-card.wc-front:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(30,30,27,0.07); }
 .wc-media {
   aspect-ratio: 9/16; background: var(--surface);
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
   transition: background 0.2s;
 }
-.work-card:hover .wc-media { background: var(--surface2); }
+.work-card.wc-front:hover .wc-media { background: var(--surface2); }
 .play-ring {
   width: 48px; height: 48px; border-radius: 50%;
   border: 1px solid var(--border); background: var(--white);
   display: flex; align-items: center; justify-content: center; transition: all 0.2s;
 }
-.work-card:hover .play-ring { background: var(--ink); border-color: var(--ink); }
+.work-card.wc-front:hover .play-ring { background: var(--ink); border-color: var(--ink); }
 .play-ring svg { width: 16px; height: 16px; fill: var(--muted); margin-left: 2px; transition: fill 0.2s; }
-.work-card:hover .play-ring svg { fill: var(--white); }
+.work-card.wc-front:hover .play-ring svg { fill: var(--white); }
 .ph-lbl { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
 .wc-media iframe { width: 100%; height: 100%; border: 0; display: block; }
 .wc-info { padding: 1.25rem 1.35rem; border-top: 1px solid var(--border); }
 .wc-cat { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green); margin-bottom: 0.35rem; }
 .wc-name { font-family: 'Playfair Display', serif; font-weight: 400; font-size: 1.1rem; color: var(--ink); margin-bottom: 0.3rem; }
 .wc-hook { font-size: 0.78rem; font-weight: 300; color: var(--muted); font-style: italic; line-height: 1.55; }
+.wc-nav { display: flex; align-items: center; justify-content: flex-end; gap: 0.6rem; padding: 0.6rem 0.1rem 0 0; }
+.wc-counter { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
+.wc-btn {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s; padding: 0;
+}
+.wc-btn:hover { background: var(--ink); border-color: var(--ink); }
+.wc-btn svg { width: 11px; height: 11px; stroke: var(--muted); transition: stroke 0.2s; }
+.wc-btn:hover svg { stroke: var(--white); }
 
 .note {
   margin-top: 1.75rem; padding: 1.35rem 1.75rem;
@@ -403,38 +418,110 @@ footer {
     <p class="sec-sub">Every video opens with a 2-second hook, clean audio, and a clear CTA — ready to run as a paid social ad.</p>
   </div>
   <div class="work-grid">
-    <div class="work-card reveal">
-      <div class="wc-media">
-        <iframe src="https://www.youtube.com/embed/LF_bIa82ins" title="Slant Board UGC" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <!-- ── Slant Board ── -->
+    <div class="work-carousel reveal">
+      <div class="wc-stack">
+        <!-- back card (placeholder) -->
+        <div class="work-card wc-back">
+          <div class="wc-media">
+            <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="ph-lbl">Coming soon</span>
+          </div>
+          <div class="wc-info">
+            <div class="wc-cat">Fitness Equipment</div>
+            <div class="wc-name">Slant Board</div>
+            <div class="wc-hook">"I always had issues doing full range of motion with squats..."</div>
+          </div>
+        </div>
+        <!-- front card -->
+        <div class="work-card wc-front">
+          <div class="wc-media">
+            <iframe src="https://www.youtube.com/embed/LF_bIa82ins" title="Slant Board UGC" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <div class="wc-info">
+            <div class="wc-cat">Fitness Equipment</div>
+            <div class="wc-name">Slant Board</div>
+            <div class="wc-hook">"Does your knee hurt, like right here?"</div>
+          </div>
+        </div>
       </div>
-      <div class="wc-info">
-        <div class="wc-cat">Fitness Equipment</div>
-        <div class="wc-name">Slant Board</div>
-        <div class="wc-hook">"Does your knee hurt, like right here?"</div>
+      <div class="wc-nav">
+        <span class="wc-counter">1 / 2</span>
+        <button class="wc-btn" aria-label="Next example">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
-    <div class="work-card reveal">
-      <div class="wc-media">
-        <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <span class="ph-lbl">Add your video</span>
+
+    <!-- ── Chalkless Grip ── -->
+    <div class="work-carousel reveal">
+      <div class="wc-stack">
+        <div class="work-card wc-back">
+          <div class="wc-media">
+            <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="ph-lbl">Add your video</span>
+          </div>
+          <div class="wc-info">
+            <div class="wc-cat">Gym Accessories</div>
+            <div class="wc-name">Chalkless Grip</div>
+            <div class="wc-hook">"Hook #2 coming soon…"</div>
+          </div>
+        </div>
+        <div class="work-card wc-front">
+          <div class="wc-media">
+            <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="ph-lbl">Add your video</span>
+          </div>
+          <div class="wc-info">
+            <div class="wc-cat">Gym Accessories</div>
+            <div class="wc-name">Chalkless Grip</div>
+            <div class="wc-hook">"The one thing keeping me from my PR…"</div>
+          </div>
+        </div>
       </div>
-      <div class="wc-info">
-        <div class="wc-cat">Gym Accessories</div>
-        <div class="wc-name">Chalkless Grip</div>
-        <div class="wc-hook">"The one thing keeping me from my PR…"</div>
+      <div class="wc-nav">
+        <span class="wc-counter">1 / 2</span>
+        <button class="wc-btn" aria-label="Next example">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
-    <div class="work-card reveal">
-      <div class="wc-media">
-        <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <span class="ph-lbl">Add your video</span>
+
+    <!-- ── Momentous Protein ── -->
+    <div class="work-carousel reveal">
+      <div class="wc-stack">
+        <div class="work-card wc-back">
+          <div class="wc-media">
+            <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="ph-lbl">Add your video</span>
+          </div>
+          <div class="wc-info">
+            <div class="wc-cat">Supplements</div>
+            <div class="wc-name">Momentous Protein</div>
+            <div class="wc-hook">"Hook #2 coming soon…"</div>
+          </div>
+        </div>
+        <div class="work-card wc-front">
+          <div class="wc-media">
+            <div class="play-ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+            <span class="ph-lbl">Add your video</span>
+          </div>
+          <div class="wc-info">
+            <div class="wc-cat">Supplements</div>
+            <div class="wc-name">Momentous Protein</div>
+            <div class="wc-hook">"I've tried 12 proteins. This one actually stuck."</div>
+          </div>
+        </div>
       </div>
-      <div class="wc-info">
-        <div class="wc-cat">Supplements</div>
-        <div class="wc-name">Momentous Protein</div>
-        <div class="wc-hook">"I've tried 12 proteins. This one actually stuck."</div>
+      <div class="wc-nav">
+        <span class="wc-counter">1 / 2</span>
+        <button class="wc-btn" aria-label="Next example">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
+
   </div>
   <div class="note reveal">
     <strong>Spec content.</strong> These videos were produced for products I personally use. All filmed and edited by me — no templates, no stock footage. Hook, product, payoff.
@@ -640,6 +727,30 @@ async function handleSubmit(e) {
     }, 3500);
   }
 }
+// ── Carousel ──
+document.querySelectorAll('.work-carousel').forEach(carousel => {
+  const stack = carousel.querySelector('.wc-stack');
+  const counter = carousel.querySelector('.wc-counter');
+  const btn = carousel.querySelector('.wc-btn');
+  const cards = () => stack.querySelectorAll('.work-card');
+  let current = 1;
+  const total = cards().length;
+
+  btn.addEventListener('click', () => {
+    const front = stack.querySelector('.wc-front');
+    const back  = stack.querySelector('.wc-back');
+
+    // Swap classes — CSS transitions handle the animation
+    front.classList.replace('wc-front', 'wc-back');
+    back.classList.replace('wc-back', 'wc-front');
+    back.style.pointerEvents  = '';
+    front.style.pointerEvents = 'none';
+
+    current = current === total ? 1 : current + 1;
+    counter.textContent = `${current} / ${total}`;
+  });
+});
+
 const io = new IntersectionObserver(entries => {
   entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('in'); });
 }, { threshold: 0.1 });
