@@ -59,9 +59,17 @@ nav {
 /* ── HERO ── */
 .hero {
   min-height: 100vh; padding-top: 60px;
-  display: flex; flex-direction: column; justify-content: center;
-  padding-left: 8vw; padding-right: 8vw; max-width: 860px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 5vw;
+  padding-left: 8vw; padding-right: 8vw;
 }
+.hero-content { max-width: 520px; display: flex; flex-direction: column; }
+.hero-video { width: clamp(220px, 22vw, 310px); }
+.hero-video-card {
+  aspect-ratio: 9/16; border-radius: 10px; overflow: hidden;
+  box-shadow: 0 28px 72px rgba(30,30,27,0.14); border: 1px solid var(--border);
+}
+.hero-video-card iframe { width: 100%; height: 100%; border: 0; display: block; }
 .hero-label {
   display: flex; align-items: center; gap: 0.75rem;
   font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
@@ -361,7 +369,8 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 0 1.5rem; }
   .nav-links li:not(:last-child):not(:nth-last-child(2)) { display: none; }
-  .hero { padding: 5.5rem 6vw 3rem; min-height: auto; }
+  .hero { padding: 5.5rem 6vw 3rem; min-height: auto; grid-template-columns: 1fr; }
+  .hero-video { display: none; }
   section { padding: 5rem 6vw; }
   .work-grid { grid-template-columns: 1fr 1fr; }
   .rates-grid { grid-template-columns: 1fr; }
@@ -393,24 +402,31 @@ footer {
 </nav>
 
 <div class="hero">
-  <div class="hero-label">
-    <span class="avail">●</span> Available · Fitness &amp; Lifestyle · San Francisco
+  <div class="hero-content">
+    <div class="hero-label">
+      <span class="avail">●</span> Available · Fitness &amp; Lifestyle · San Francisco
+    </div>
+    <h1 class="hero-headline">
+      Short-form content<br>that <em>actually</em> <span class="grn">converts.</span>
+    </h1>
+    <p class="hero-sub">I create UGC videos for fitness and wellness brands — hook-first, built for paid social, delivered on time. No fluff, no chasing me down.</p>
+    <div class="hero-btns">
+      <a href="#portfolio" class="btn-dark">
+        View my work
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#rates" class="btn-text">See pricing →</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">3</div><div class="stat-lbl">Spec Videos</div></div>
+      <div><div class="stat-num">&lt;24h</div><div class="stat-lbl">Response Time</div></div>
+      <div><div class="stat-num">7 days</div><div class="stat-lbl">Turnaround</div></div>
+    </div>
   </div>
-  <h1 class="hero-headline">
-    Short-form content<br>that <em>actually</em> <span class="grn">converts.</span>
-  </h1>
-  <p class="hero-sub">I create UGC videos for fitness and wellness brands — hook-first, built for paid social, delivered on time. No fluff, no chasing me down.</p>
-  <div class="hero-btns">
-    <a href="#portfolio" class="btn-dark">
-      View my work
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
-    <a href="#rates" class="btn-text">See pricing →</a>
-  </div>
-  <div class="hero-stats">
-    <div><div class="stat-num">3</div><div class="stat-lbl">Spec Videos</div></div>
-    <div><div class="stat-num">&lt;24h</div><div class="stat-lbl">Response Time</div></div>
-    <div><div class="stat-num">7 days</div><div class="stat-lbl">Turnaround</div></div>
+  <div class="hero-video">
+    <div class="hero-video-card">
+      <iframe src="https://www.youtube.com/embed/LF_bIa82ins" title="Slant Board UGC" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
   </div>
 </div>
 
