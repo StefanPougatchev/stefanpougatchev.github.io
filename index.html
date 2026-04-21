@@ -812,40 +812,27 @@ async function handleSubmit(e) {
     }, 3500);
   }
 }
-// ── Hero fan rotator ──
+// ── Hero fan rotator (click-only) ──
 (function () {
   const stack = document.getElementById('heroStack');
   if (!stack) return;
   const cards = Array.from(stack.querySelectorAll('.hero-video-card'));
   const POSITIONS = ['pos-left', 'pos-center', 'pos-right'];
-  const INTERVAL = 5000;
   let order = [0, 1, 2]; // order[i] = index of card at POSITIONS[i]
-  let timer = null;
-  let stopped = false;
 
   const render = () => {
     cards.forEach(c => c.classList.remove(...POSITIONS));
     order.forEach((cardIdx, posIdx) => cards[cardIdx].classList.add(POSITIONS[posIdx]));
   };
-  const tick = () => { order = [order[2], order[0], order[1]]; render(); };
-  const start = () => { if (!stopped && !timer) timer = setInterval(tick, INTERVAL); };
-  const pause = () => { if (timer) { clearInterval(timer); timer = null; } };
-  const stop  = () => { stopped = true; pause(); };
 
-  // hover = pause; leave = resume (unless clicked)
-  stack.addEventListener('mouseenter', pause);
-  stack.addEventListener('mouseleave', start);
-
-  // click any card = stop rotation permanently; if side card, bring to center
+  // click side card = bring it to center; click center card = no-op (iframe plays)
   cards.forEach((card, i) => {
     card.addEventListener('click', () => {
-      stop();
+      if (order[1] === i) return;
       while (order[1] !== i) order = [order[2], order[0], order[1]];
       render();
     });
   });
-
-  start();
 })();
 
 // ── Portfolio carousels ──
