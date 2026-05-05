@@ -379,6 +379,7 @@ section { padding: 6rem 8vw; }
 .ph-photo { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
 .ph-photo svg { width: 36px; height: 36px; stroke: var(--faint); fill: none; }
 .ph-photo p { font-size: 0.65rem; letter-spacing: 0.08em; color: var(--faint); }
+.about-img img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 .badge-row { display: flex; gap: 0.5rem; margin-top: 1.25rem; flex-wrap: wrap; }
 .nbadge {
   font-size: 0.62rem; font-weight: 400; letter-spacing: 0.08em;
@@ -697,10 +698,7 @@ footer {
 <section id="about">
   <div>
     <div class="about-img">
-      <div class="ph-photo">
-        <svg viewBox="0 0 24 24" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-        <p>Your photo</p>
-      </div>
+      <img src="aboutOG.jpg" alt="Stefan Pougatchev">
     </div>
     <div class="badge-row">
       <span class="nbadge">Fitness</span>
